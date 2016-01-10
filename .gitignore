@@ -1,0 +1,10 @@
+*
+!*/
+!*.*
+nimcache/
+*.swp
+*.log
+nohup.out
+
+secret.*
+/ddnet
