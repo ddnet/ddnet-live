@@ -1,6 +1,9 @@
 import irc, strutils, secret
 
-const forbiddenCommands = @["exec", "quit", "exit", "disconnect"]
+const
+  forbiddenCommands = ["exec", "quit", "exit", "disconnect"]
+  allowedNicks = ["onionly_me", "ryozukii", "deen_ddnet", "ddnetlive",
+    "aoeteeworlds", "learath2"]
 
 var
   client = newIrc("irc.twitch.tv", nick = "ddnetlive",
@@ -8,6 +11,9 @@ var
   fifo = open("input.fifo", fmWrite)
 
 proc handle(nick, cmd: string) =
+  if nick notin allowedNicks:
+    return
+
   for f in forbiddenCommands:
     if cmd.contains(f):
       return
